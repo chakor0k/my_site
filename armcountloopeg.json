@@ -1,0 +1,29 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": { 
+        "skuName": { 
+            "type":"string" 
+        }
+    },
+    "variables": {  },
+    "functions": [  ],
+    "resources": [
+        {"name": "[concat(copyIndex(),'st', uniqueString(resourceGroup().id))]",
+         "type":"Microsoft.Storage/storageAccounts",
+         "apiVersion":"2018-07-01",
+         "kind":"Storage",
+         "sku": {
+             "name": "[parameters('skuName')]"
+         },
+         "location":"Australia Southeast",
+         "tags":{},
+         "properties":{},
+         "copy": {
+             "name": "storagecopy",
+             "count": 5
+         }
+        }
+      ],
+    "outputs": {  }
+}
